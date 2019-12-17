@@ -5,94 +5,30 @@
     box-sizing: border-box;
 }
 
-header {
-    padding-top: 20px;
-    background-color: dimgray;
-    text-align: center;
-    color: white;
-}
-
-header h1 {
-    margin-bottom: 0.5em;
-}
-
-nav ul {
-    list-style-type: none;
-    overflow: hidden;
-    background-color: #333;
-}
-
-nav li {
-    float: left;
-}
-
-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 0.5em 1.6em;
-    text-decoration: none;
-}
-
-nav li a:hover {
-    background-color: #111;
-}
-
-nav .active {
-    background-color: #666;
-}
-
-footer {
-    position: absolute;
-    width: 100%;
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-main{
+#page-container{
+    display: flex;
+    background: lightslategray;
+    height: 70%;
     max-width: 100%;
-    margin: 10px;
-    
+    max-height: 100%;
+    flex-direction: column;
 }
-#item-container{
-    padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  
-  -webkit-flex-flow: row wrap;
-  justify-content: space-around;
-}
-.item{
-    background: tomato;
-    padding: 5px;
-  width: 200px;
-  height: 150px;
-  margin-top: 10px;
-  
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
-}
-#inputbox-container{
+#navbar-container{
     display: flex;
     justify-content: center;
-    background: lightslategray;
-    
-    margin: 10px;
-    input{
-        margin: 10px;
-        font-size: 50px;
-    }
-    #add-button{
+    nav{
+        display: flex;
         width: 10%;
+        justify-content: space-between;
         margin: 10px;
-        font-size: 50px;
     }
-    
+}
+#item-container{
+    display: flex;
 
+    .item{
+        width: 100px;
+        height: 100px;
+        background: chocolate;
+    }
 }
