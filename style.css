@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+/*------------body-------------*/
+body {
+  max-width: 980px;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 1.6em;
+  margin: 0 auto 15px;
+  padding: 15px;
+}
+
+/*------------header------------*/
+header {
+  padding-top: 20px;
+  background-color: dimgray;
+  text-align: center;
+  color: white;
+}
+header h1 {
+  margin-bottom: 0.5em;
+}
+nav .active {
+  background-color: #666;
+}
+nav ul {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: #333;
+}
+nav li {
+  float: left;
+}
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0.5em 1.6em;
+  text-decoration: none;
+}
+nav li a:hover {
+  background-color: #111;
+}
+
+main {
+  background-color: #ddd;
+  max-width: 100%;
+  height: 100vh;
+}
+#item-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+.item {
+  background: tomato;
+  padding: 5px;
+  width: 50%;
+  height: 150px;
+  margin: 5px;
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+  float: left;
+  border-end-end-radius: 25px;
+  border-start-start-radius: 25px;
+}
+#inputbox-container {
+  display: flex;
+  justify-content: center;
+  background: lightslategray;
+  margin: 10px;
+}
+#inputbox-container input {
+  margin: 10px;
+  font-size: 50px;
+}
+#inputbox-container #add-button {
+  width: 10%;
+  margin: 10px;
+  font-size: 50px;
+}
+
+/*------------footer------------*/
+footer {
+  position: absolute;
+  background-color: black;
+  width: 960px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
