@@ -30,3 +30,13 @@
   height: 100px;
   background: chocolate;
 }
+
+/*------------footer------------*/
+footer {
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
