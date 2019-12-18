@@ -51,7 +51,7 @@ main {
   margin: 0;
   list-style: none;
   display: flex;
-  -webkit-flex-flow: row wrap;
+ 
   justify-content: space-around;
 }
 .item {
