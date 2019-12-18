@@ -4,17 +4,23 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
+body {
+  height: 100vh;
+}
 #page-container {
   display: flex;
   background: lightslategray;
-  height: 70%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   flex-direction: column;
+  justify-content: space-between;
 }
 #navbar-container {
   display: flex;
   justify-content: center;
+  height: 5%;
+  background: crimson;
 }
 #navbar-container nav {
   display: flex;
@@ -24,9 +30,18 @@
 }
 #item-container {
   display: flex;
+  background: whitesmoke;
+  height: 85%;
 }
 #item-container .item {
-  width: 100px;
-  height: 100px;
+  width: 50%;
+  height: 15%;
   background: chocolate;
+  font-size: 40px;
+}
+#footer {
+  height: 10%;
+  background: cornflowerblue;
+  text-align: center;
+  padding: 10px;
 }
