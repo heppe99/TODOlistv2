@@ -105,17 +105,21 @@ main {
   text-align: center;
   font-weight: bold;
   font-size: 120%;
-  line-height: 150px;
+  line-height: 25px;
   text-align: justify;
 
   height: 150px;
   width: 340px;
   margin: 5px;
-  padding: 5px;
+  padding: 10px;
 
   border-end-end-radius: 25px;
   border-start-start-radius: 25px;
   border: 2px solid tomato;
+}
+
+.item h2 {
+  color: tomato;
 }
 
 /*------------footer------------*/
@@ -130,10 +134,13 @@ footer {
 
 /*---------------- Responsive -------------------*/
 
-@media (min-width: 120px) and (max-width: 399px) {
+@media (min-width: 10px) and (max-width: 399px) {
   /* for mobile */
   .item {
     width: 100%;
+    font-size: 100%;
+    line-height: 25px;
+    text-align: justify;
   }
 }
 
