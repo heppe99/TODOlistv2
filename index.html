@@ -23,15 +23,15 @@
 
     <main>
         <div id="input-box-container">
-            <input type="text" name="input-title" id="title" placeholder="Title..">
-            <input type="text" name="input-description" id="description" placeholder="Description..">
+            <input id="title" type="text" name="input-title" placeholder="Title..">
+            <input id="description" type="text" name="input-description" placeholder="Description..">
             <button id="add-button"> Add</button>
         </div>
 
         <div id="item-container">
-            <div class="item" id="item">
-                <h2 id="item-title">Title:</h2>
-                <p id="item-description">Description:</p>
+
+            <div class="item">
+                <ul id="todoList"> </ul>
             </div>
 
         </div>
@@ -42,7 +42,7 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="style.css"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

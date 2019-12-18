@@ -5,10 +5,15 @@
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
+
 /*------------body-------------*/
 html {
   background-color: #ddd;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 body {
   max-width: 980px;
   font-size: 16px;
@@ -118,8 +123,12 @@ main {
   border: 2px solid tomato;
 }
 
-.item h2 {
+#todoList h3 {
   color: tomato;
+}
+
+#todoList li {
+  list-style: none;
 }
 
 /*------------footer------------*/
