@@ -18,7 +18,7 @@ var EventHandlers = (function () {
                 ToDoStorage.setTodo(title, description);
 
 
-                location.reload();  // refresh the page
+                //location.reload();  // refresh the page
             }
 
             $('#title').val('');
