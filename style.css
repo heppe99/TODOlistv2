@@ -123,11 +123,11 @@ main {
   border: 2px solid tomato;
 }
 
-#todoList h3 {
+.item h3 {
   color: tomato;
 }
 
-#todoList li {
+.item li {
   list-style: none;
 }
 
