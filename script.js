@@ -26,7 +26,7 @@ var EventHandlers = (function () {
 
                 const index = todoList.length+1;
                 //$(this).index();
-                window.alert(index);   // to fix this 
+                //window.alert(index);   // to fix this 
 
 
                 DocumentEdit.setToDoToContainer(title, description, index);
@@ -52,16 +52,17 @@ var EventHandlers = (function () {
             */
            console.log(this.id);
  
-           ToDoStorage.saveChangesToLocalStorage() 
+           ToDoStorage.saveChangesToLocalStorage(); 
            //ToDoStorage.updateTodo(this.id, todoList);
             refresh();
         })
 
         //Handles complete button on each todo
-        $(document).on('click', '.completeBtn', function () {
+        $(document).on('click', '.completeButton', function () {
             console.log("COMPLETE BUTTON :" + this.id);
-            ToDoListHandler.markAsComplete(todoList, this.id / 1000);
-            ToDoStorage.updateTodo(currentId, todoList);
+            ToDoListHandler.markAsComplete(todoList, this.id-1);
+            ToDoStorage.saveChangesToLocalStorage(); 
+            //ToDoStorage.updateTodo(currentId, todoList);
 
             refresh();
         })
@@ -79,7 +80,12 @@ var EventHandlers = (function () {
        $("#item-container").empty();
         for (var i = 0; i < todoList.length; i++)
         {
-            DocumentEdit.setToDoToContainer(todoList[i].title, todoList[i].description, i+1)
+            DocumentEdit.setToDoToContainer(todoList[i].title, todoList[i].description, i+1);
+            if(todoList[i].completed)
+            {
+                DocumentEdit.markTodoAsComplete(i+1);
+            }
+            
         }
 
     }
@@ -103,7 +109,7 @@ var DocumentEdit = (function () {
         let deleteButton = "<button class=\"deleteButton\" id=\"" + index + "\" >✘</button>";
         let completeButton = "<button class=\"completeButton\" id=\"" + index + "\" >✔</button>";
         
-        $("#item-container").append("<div class=\"item id=\"" + index * 100 + "\">"
+        $("#item-container").append("<div class=\"item\" id=\"" + index * 100 + "\">"
             + "<h3 id=\"" + index * 1000 + "\" >" + 'Title:' + "</h3>" + "<p>" + textTitle + "</p>"
             + "<h3 id=\"" + index * 1000 + "\" >" + 'Description:' + "</h3>" + "<p>" + textDesc + "</p>"
             + "<li id=\"" + index * 10000 + "\" >" + completeButton + deleteButton + "</li>" + "</div>");
@@ -120,7 +126,7 @@ var DocumentEdit = (function () {
 
 
     function markTodoAsComplete(index) {
-        $('#' + index).css({ 'text-decoration-line': 'line-through' })
+        $('#' + (index*100)).css({ 'text-decoration-line': 'line-through' })
     }
 
 
