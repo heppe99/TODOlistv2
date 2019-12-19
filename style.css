@@ -131,6 +131,28 @@ main {
   list-style: none;
 }
 
+.deleteButton {
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.3);
+}
+
+.completeButton {
+  color: limegreen;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.3);
+}
+
+.completeButton:hover,
+.deleteButton:hover {
+  background-color: tomato;
+}
 /*------------footer------------*/
 footer {
   background-color: black;
