@@ -1,18 +1,39 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
+
+/*------------body-------------*/
+html {
+  background-color: #ddd;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+  max-width: 980px;
+  font-size: 16px;
+  line-height: 1.6em;
+  margin: 0 auto;
+}
+
+/*------------header------------*/
 header {
   padding-top: 20px;
   background-color: dimgray;
-  text-align: center;
   color: white;
+  text-align: center;
 }
 header h1 {
+  line-height: 1.6em;
   margin-bottom: 0.5em;
+  text-shadow: 2px 4px #000;
 }
+
 nav .active {
   background-color: #666;
 }
@@ -34,50 +55,169 @@ nav li a {
 nav li a:hover {
   background-color: #111;
 }
-footer {
-  position: absolute;
-  width: 100%;
-  background-color: black;
-  color: white;
-  text-align: center;
-  padding: 20px;
+span {
+  color: tomato;
 }
+/*------------main------------*/
 main {
+  background-color: #fff;
   max-width: 100%;
-  margin: 10px;
+  height: 100vh;
+  overflow-y: scroll;
 }
-#item-container {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+/*----input: text & description------*/
+
+#input-box-container {
   display: flex;
- 
+  flex: auto;
+}
+
+#input-box-container input {
+  border: 2px solid dimgray;
+  margin: 10px 20px;
+  width: 90%;
+  font-size: 120%;
+  text-indent: 5px;
+  border-radius: 50px;
+}
+#input-box-container #add-button {
+  background-color: #666;
+  color: #fff;
+  border: 2px solid #333;
+  font-size: 70%;
+  border-radius: 50px;
+  width: 20%;
+  height: 30px;
+  margin: 10px 20px;
+}
+
+#input-box-container #add-button:hover {
+  background-color: tomato;
+}
+
+/*--------items:todo-boxes-------*/
+#item-container {
+  list-style: none;
+  color: #000;
+  padding-right: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 .item {
-  background: tomato;
-  padding: 5px;
-  width: 200px;
-  height: 150px;
-  margin-top: 10px;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
+  background: dimgray;
   text-align: center;
+  font-weight: bold;
+  font-size: 120%;
+  line-height: 25px;
+  text-align: justify;
+
+  height: 150px;
+  width: 340px;
+  margin: 5px;
+  padding: 10px;
+
+  border-end-end-radius: 25px;
+  border-start-start-radius: 25px;
+  border: 2px solid tomato;
 }
-#inputbox-container {
-  display: flex;
-  justify-content: center;
-  background: lightslategray;
-  margin: 10px;
+
+.item h3 {
+  color: tomato;
 }
-#inputbox-container input {
-  margin: 10px;
-  font-size: 50px;
+
+.item li {
+  list-style: none;
 }
-#inputbox-container #add-button {
-  width: 10%;
-  margin: 10px;
-  font-size: 50px;
+
+.deleteButton {
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.3);
+}
+
+.completeButton {
+  color: limegreen;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.3);
+}
+
+.completeButton:hover,
+.deleteButton:hover {
+  background-color: tomato;
+}
+/*------------footer------------*/
+footer {
+  background-color: black;
+  color: white;
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+/*-----------------News page---------------------*/
+fieldset {
+  height: 80vh;
+  margin: 20px;
+}
+legend {
+  margin-left: 20px;
+  color: tomato;
+}
+/*---------------- Responsive -------------------*/
+
+@media (min-width: 10px) and (max-width: 399px) {
+  /* for mobile */
+  .item {
+    width: 100%;
+    font-size: 100%;
+    line-height: 25px;
+    text-align: justify;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  /* for mobile */
+
+  body {
+    overflow-y: hidden;
+  }
+  #input-box-container {
+    flex-direction: column;
+  }
+
+  #input-box-container #add-button {
+    width: 90%;
+  }
+
+  #item-container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 10px;
+  }
+
+  footer {
+    display: none;
+  }
+
+  nav {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 612px) {
+  /* for mobile */
+  #input-box-container {
+    flex-direction: column;
+  }
 }
