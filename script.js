@@ -7,24 +7,31 @@ var EventHandlers = (function () {
 
     function init() {
 
+        todoList = ToDoStorage.getToDoList();
+
+         
+        refresh();
         //get the input values and set them to local storage
         $("#add-button").click(function () {
 
             const title = $("#title").val();
             const description = $("#description").val();
 
-
+            
 
 
             // Execute this condition if true ( means write some text in both fields)
             // If false (means no inputs) so do nothing
             if (title && description) {
 
-                const index = $(this).index();   // to fix this 
+                const index = todoList.length+1;
+                //$(this).index();
+                window.alert(index);   // to fix this 
 
 
                 DocumentEdit.setToDoToContainer(title, description, index);
                 ToDoStorage.setTodo(title, description);
+                //refresh();
                 //location.reload();  // refresh the page
             }
 
@@ -34,14 +41,19 @@ var EventHandlers = (function () {
 
 
         //Handles delete button on each todo
-        $(document).on('click', '.deleteBtn', function () {
+        $(document).on('click', '.deleteButton', function () {
 
-            ToDoListHandler.deleteItem(todoList, this.id);
+            ToDoListHandler.deleteItem(todoList, this.id-1);
+            
             console.log("DELETE item: " + this.id);
-
+            /*
             DocumentEdit.deleteToDoFromContainer(this.id * 100);
             console.log("DELETE li: " + this.id * 100);
-            ToDoStorage.updateTodo(currentId, todoList);
+            */
+           console.log(this.id);
+ 
+           ToDoStorage.saveChangesToLocalStorage() 
+           //ToDoStorage.updateTodo(this.id, todoList);
             refresh();
         })
 
@@ -58,9 +70,16 @@ var EventHandlers = (function () {
     //Refreshes the UL list
     function refresh() {
 
+       /*
         for (const i in todoList) {
 
-            DocumentEdit.setToDoToContainer(textTitle, textDesc, i)
+            DocumentEdit.setToDoToContainer(title, description, i)
+        }
+        */
+       $("#item-container").empty();
+        for (var i = 0; i < todoList.length; i++)
+        {
+            DocumentEdit.setToDoToContainer(todoList[i].title, todoList[i].description, i+1)
         }
 
     }
@@ -82,8 +101,8 @@ var DocumentEdit = (function () {
     function setToDoToContainer(textTitle, textDesc, index) {
 
         let deleteButton = "<button class=\"deleteButton\" id=\"" + index + "\" >✘</button>";
-        let completeButton = "<button class=\"completeButton\" id=\"" + (index * 1000) + "\" >✔</button>";
-
+        let completeButton = "<button class=\"completeButton\" id=\"" + index + "\" >✔</button>";
+        
         $("#item-container").append("<div class=\"item id=\"" + index * 100 + "\">"
             + "<h3 id=\"" + index * 1000 + "\" >" + 'Title:' + "</h3>" + "<p>" + textTitle + "</p>"
             + "<h3 id=\"" + index * 1000 + "\" >" + 'Description:' + "</h3>" + "<p>" + textDesc + "</p>"
@@ -208,6 +227,7 @@ var ToDoStorage = (function () {
             id: maxId + 1,
             title: title,
             description: description,
+            completed: false,
         };
 
         todoList.push(todo);
@@ -235,6 +255,9 @@ var ToDoStorage = (function () {
 
     // important function .. 
 
+    function getToDoList (){
+        return todoList;
+    }
     function updateTodo(id, updatedTodoList) {
         for (const i in todoList) {
             //Update if id is found
@@ -250,7 +273,8 @@ var ToDoStorage = (function () {
         setTodo,
         removeTodo,
         updateTodo,
-        saveChangesToLocalStorage
+        saveChangesToLocalStorage,
+        getToDoList
     }
 
 
@@ -258,6 +282,6 @@ var ToDoStorage = (function () {
 
 
 $(document).ready(function () {
-    EventHandlers.init();
     ToDoStorage.getTodo();
+    EventHandlers.init();
 });
