@@ -162,7 +162,15 @@ footer {
   text-align: center;
   padding: 20px 0;
 }
-
+/*-----------------News page---------------------*/
+fieldset {
+  height: 80vh;
+  margin: 20px;
+}
+legend {
+  margin-left: 20px;
+  color: tomato;
+}
 /*---------------- Responsive -------------------*/
 
 @media (min-width: 10px) and (max-width: 399px) {

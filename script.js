@@ -39,7 +39,7 @@ var EventHandlers = (function () {
             ToDoListHandler.deleteItem(todoList, this.id);
             console.log("DELETE item: " + this.id);
 
-            documentEdit.deleteLi(this.id * 100);
+            DocumentEdit.deleteToDoFromContainer(this.id * 100);
             console.log("DELETE li: " + this.id * 100);
             ToDoStorage.updateTodo(currentId, todoList);
             refresh();
@@ -74,7 +74,6 @@ var EventHandlers = (function () {
 })();
 
 
-
 var DocumentEdit = (function () {
 
 
@@ -83,12 +82,12 @@ var DocumentEdit = (function () {
     function setToDoToContainer(textTitle, textDesc, index) {
 
         let deleteButton = "<button class=\"deleteButton\" id=\"" + index + "\" >✘</button>";
-        let completeButton = "<button class=\"completeButton\" id=\"" + (index * 10) + "\" >✔</button>";
+        let completeButton = "<button class=\"completeButton\" id=\"" + (index * 1000) + "\" >✔</button>";
 
-        $("#item-container").append("<div class=\"item\">"
-            + "<h3 id=\"" + index * 100 + "\" >" + 'Title:' + "</h3>" + "<p>" + textTitle + "</p>"
-            + "<h3 id=\"" + index * 100 + "\" >" + 'Description:' + "</h3>" + "<p>" + textDesc + "</p>"
-            + "<li id=\"" + index * 1000 + "\" >" + completeButton + deleteButton + "</li>" + "</div>");
+        $("#item-container").append("<div class=\"item id=\"" + index * 100 + "\">"
+            + "<h3 id=\"" + index * 1000 + "\" >" + 'Title:' + "</h3>" + "<p>" + textTitle + "</p>"
+            + "<h3 id=\"" + index * 1000 + "\" >" + 'Description:' + "</h3>" + "<p>" + textDesc + "</p>"
+            + "<li id=\"" + index * 10000 + "\" >" + completeButton + deleteButton + "</li>" + "</div>");
 
 
     }
@@ -116,12 +115,32 @@ var DocumentEdit = (function () {
 
 var ToDoListHandler = (function () {
 
+
+    //Adds an item to the todo list  
+    function addItem(todoList, title, description) {
+
+        // Every to do gets an id which we set to the length of the list 
+        // so one index after the last index
+        const todoId = todoList.length;
+
+        const todo = {
+            id: todoId,
+            title: title,
+            description: description,
+            completed: false,
+        }
+
+        todoList.push(todo);
+
+    }
+
+
     //Deletes an item from todo-list.
     function deleteItem(todoList, index) {
         todoList.splice(index, 1);
     }
 
-    //Gets an item from the todolist.
+    //Gets an item from the todo list.
     function getItem(todoList, index) {
         itemToReturn = todoList[index];
 
@@ -134,6 +153,7 @@ var ToDoListHandler = (function () {
     }
 
     return {
+        addItem,
         markAsComplete,
         deleteItem,
         getItem
@@ -214,11 +234,23 @@ var ToDoStorage = (function () {
         saveChangesToLocalStorage();
     }
 
+    // important function .. 
+
+    function updateTodo(id, updatedTodoList) {
+        for (const i in todoList) {
+            //Update if id is found
+            if (todoList[i].id === id) {
+                todoList[i].id = updatedTodoList;
+            }
+        }
+        saveChangesUserList();
+    }
 
     return {
         getTodo,
         setTodo,
         removeTodo,
+        updateTodo,
         saveChangesToLocalStorage
     }
 
