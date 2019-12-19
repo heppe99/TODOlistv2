@@ -1,6 +1,9 @@
 var EventHandlers = (function () {
 
 
+    var todoList = [];
+    let currentId = null;
+
 
     function init() {
 
@@ -10,14 +13,18 @@ var EventHandlers = (function () {
             const title = $("#title").val();
             const description = $("#description").val();
 
+
+
+
             // Execute this condition if true ( means write some text in both fields)
             // If false (means no inputs) so do nothing
             if (title && description) {
 
-                DocumentEdit.setToDoToContainer(title, description);
+                const index = $(this).index();   // to fix this 
+
+
+                DocumentEdit.setToDoToContainer(title, description, index);
                 ToDoStorage.setTodo(title, description);
-
-
                 //location.reload();  // refresh the page
             }
 
@@ -26,10 +33,41 @@ var EventHandlers = (function () {
         });
 
 
+        //Handles delete button on each todo
+        $(document).on('click', '.deleteBtn', function () {
+
+            ToDoListHandler.deleteItem(todoList, this.id);
+            console.log("DELETE item: " + this.id);
+
+            documentEdit.deleteLi(this.id * 100);
+            console.log("DELETE li: " + this.id * 100);
+            ToDoStorage.updateTodo(currentId, todoList);
+            refresh();
+        })
+
+        //Handles complete button on each todo
+        $(document).on('click', '.completeBtn', function () {
+            console.log("COMPLETE BUTTON :" + this.id);
+            ToDoListHandler.markAsComplete(todoList, this.id / 1000);
+            ToDoStorage.updateTodo(currentId, todoList);
+
+            refresh();
+        })
+    }
+
+    //Refreshes the UL list
+    function refresh() {
+
+        for (const i in todoList) {
+
+            DocumentEdit.setToDoToContainer(textTitle, textDesc, i)
+        }
+
     }
 
     return {
         init,
+        refresh
     };
 
 
@@ -40,39 +78,69 @@ var EventHandlers = (function () {
 var DocumentEdit = (function () {
 
 
+
     //first add an item box to the big container and then append texts to it
     function setToDoToContainer(textTitle, textDesc, index) {
 
         let deleteButton = "<button class=\"deleteButton\" id=\"" + index + "\" >✘</button>";
-        let completeButton = "<button class=\"completeButton\" id=\"" + (index * 1000) + "\" >✔</button>";
+        let completeButton = "<button class=\"completeButton\" id=\"" + (index * 10) + "\" >✔</button>";
 
         $("#item-container").append("<div class=\"item\">"
             + "<h3 id=\"" + index * 100 + "\" >" + 'Title:' + "</h3>" + "<p>" + textTitle + "</p>"
             + "<h3 id=\"" + index * 100 + "\" >" + 'Description:' + "</h3>" + "<p>" + textDesc + "</p>"
-            + "<li id=\"" + index * 100 + "\" >" + deleteButton + completeButton + "</li>" + "</div>");
+            + "<li id=\"" + index * 1000 + "\" >" + completeButton + deleteButton + "</li>" + "</div>");
+
+
     }
 
 
-    // function deleteToDoFromContainer(index) {
+    function deleteToDoFromContainer(index) {
 
-    //     $("#" + index).remove();
-    // }
+        $("#" + index).remove();
+
+    }
 
 
-    // function markTodoAsComplete(index) {
-    //     $('#' + index).css({ 'text-decoration-line': 'line-through' })
-    // }
+    function markTodoAsComplete(index) {
+        $('#' + index).css({ 'text-decoration-line': 'line-through' })
+    }
 
 
     return {
         setToDoToContainer,
-        // deleteToDoFromContainer,
-        // markTodoAsComplete
+        deleteToDoFromContainer,
+        markTodoAsComplete
     }
 
 })();
 
+var ToDoListHandler = (function () {
 
+    //Deletes an item from todo-list.
+    function deleteItem(todoList, index) {
+        todoList.splice(index, 1);
+    }
+
+    //Gets an item from the todolist.
+    function getItem(todoList, index) {
+        itemToReturn = todoList[index];
+
+        return itemToReturn;
+    }
+
+    //Marks an item as complete.
+    function markAsComplete(todoList, index) {
+        todoList[index].completed = true;
+    }
+
+    return {
+        markAsComplete,
+        deleteItem,
+        getItem
+    }
+
+
+})();
 
 var ToDoStorage = (function () {
 
@@ -82,6 +150,7 @@ var ToDoStorage = (function () {
 
     //Gets all todo-s from local Storage to userList
     function getTodo() {
+
         const listTodo = localStorage.getItem("TodoList");
         todoList = JSON.parse(listTodo);
 
@@ -106,7 +175,7 @@ var ToDoStorage = (function () {
     //Saves new todo in LocalStorage
     function setTodo(title, description) {
 
-        //Sets the max id 
+        //Sets the max id
         let maxId = 0;
         for (const i in todoList) {
             const todo = todoList[i];
@@ -115,7 +184,7 @@ var ToDoStorage = (function () {
             }
         }
 
-        // Create todo object 
+        // Create todo object
         const todo = {
             id: maxId + 1,
             title: title,
