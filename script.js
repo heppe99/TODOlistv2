@@ -2,7 +2,7 @@ var EventHandlers = (function () {
 
 
     var todoList = [];
-    let currentId = null;
+    
 
 
     function init() {
@@ -74,7 +74,7 @@ var EventHandlers = (function () {
        /*
         for (const i in todoList) {
 
-            DocumentEdit.setToDoToContainer(title, description, i)
+            aDocumentEdit.setToDoToContainer(title, description, i)
         }
         */
        $("#item-container").empty();
